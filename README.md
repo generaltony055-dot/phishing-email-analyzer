@@ -69,7 +69,7 @@ phishing-email-analyzer/
 |
 └── uploads/
 
-##Installation:
+## Installation:
 
 git clone https://github.com/generaltony055-dot/phishing-email-analyzer.git
 
