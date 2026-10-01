@@ -41,29 +41,17 @@ The analyzer examines multiple signals from an email:
 ```text
 
 Email File
-
 &#x20;   |
-
 &#x20;   +-- Sender Analysis
-
 &#x20;   |
-
 &#x20;   +-- URL Analysis
-
 &#x20;   |
-
 &#x20;   +-- Language Analysis
-
 &#x20;   |
-
 &#x20;   v
-
 Risk Scoring
-
 &#x20;   |
-
 &#x20;   v
-
 Risk Level
 
 
@@ -101,40 +89,24 @@ Regular expressions
 Project Structure
 
 phishing-email-analyzer/
-
 |
-
 ├── analyzer.py
-
 ├── app.py
-
 ├── test.py
-
 ├── requirements.txt
-
 ├── README.md
-
 ├── .gitignore
-
 |
-
 ├── templates/
-
 │   └── index.html
-
 |
-
 ├── samples/
-
 │   └── test\_email.eml
-
 |
-
 └── uploads/
 
-
-
 Installation
+
 
 Clone the repository:
 
