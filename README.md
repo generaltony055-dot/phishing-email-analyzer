@@ -69,12 +69,10 @@ phishing-email-analyzer/
 |
 └── uploads/
 
-Installation
+Installation:
 
+git clone https://github.com/generaltony055-dot/phishing-email-analyzer.git
 
-Clone the repository:
-
-git clone YOUR\_GITHUB\_REPOSITORY\_URL
 
 cd phishing-email-analyzer
 
