@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phishing Email Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+        }
+
+        .upload-box {
+            background: #1f2937;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 30px;
+            background: #1f2937;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .high {
+            color: #ef4444;
+        }
+
+        .medium {
+            color: #f59e0b;
+        }
+
+        .low {
+            color: #22c55e;
+        }
+
+        .item {
+            background: #374151;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🔐 Phishing Email Analyzer</h1>
+
+    <div class="upload-box">
+
+        <h2>Analyze an Email</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="email_file"
+                accept=".eml"
+                required
+            >
+
+            <br>
+
+            <button type="submit">
+                Analyze Email
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if result %}
+
+    <div class="result">
+
+        <h2>
+            Risk Level:
+
+            <span class="{{ result.level|lower }}">
+                {{ result.level }}
+            </span>
+        </h2>
+
+        <h2>
+            Risk Score: {{ result.score }}
+        </h2>
+
+
+        <div class="item">
+            <strong>Sender:</strong>
+            {{ result.sender }}
+        </div>
+
+
+        <div class="item">
+            <strong>Recipient:</strong>
+            {{ result.recipient }}
+        </div>
+
+
+        <div class="item">
+            <strong>Subject:</strong>
+            {{ result.subject }}
+        </div>
+
+
+        <h3>Suspicious URLs</h3>
+
+        {% if result.urls %}
+
+            {% for url in result.urls %}
+
+            <div class="item">
+
+                <strong>URL:</strong>
+                {{ url.url }}
+
+                <br>
+
+                <strong>Domain:</strong>
+                {{ url.domain }}
+
+                <br>
+
+                <strong>Suspicious:</strong>
+                {{ url.suspicious }}
+
+                {% for reason in url.reasons %}
+                    <br>
+                    ⚠ {{ reason }}
+                {% endfor %}
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No URLs found.</p>
+
+        {% endif %}
+
+
+        <h3>Suspicious Language</h3>
+
+        {% if result.urgent_words %}
+
+            {% for word in result.urgent_words %}
+
+            <div class="item">
+                ⚠ {{ word }}
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No suspicious language detected.</p>
+
+        {% endif %}
+
+
+        <h3>Reasons</h3>
+
+        {% for reason in result.reasons %}
+
+        <div class="item">
+            ⚠ {{ reason }}
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</body>
+
+</html>
